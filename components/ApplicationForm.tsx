@@ -24,9 +24,10 @@ export function ApplicationForm() {
   const submit = async (data: FormData) => {
     setSubmitError("");
     try {
-      
+      const applicationId = `IL-${Date.now().toString().slice(-8)}`;
 
       const application = await addDoc(collection(db, "applications"), {
+        applicationId: applicationId,
         name: data.fullName,
         email: data.email,
         phone: data.phone,

@@ -11,6 +11,7 @@ import { db } from "@/lib/firebase";
 
 export default function StatusPage() {
   const [email, setEmail] = useState("");
+  const [applicationId, setApplicationId] = useState("");
   const [loading, setLoading] = useState(false);
   const [data, setData] = useState<any>(null);
   const [error, setError] = useState("");
@@ -23,7 +24,8 @@ export default function StatusPage() {
     try {
       const q = query(
         collection(db, "applications"),
-        where("email", "==", email.trim())
+        where("email", "==", email.trim()),
+        where("applicationId", "==", applicationId.trim())
       );
 
       const snap = await getDocs(q);
@@ -65,6 +67,13 @@ export default function StatusPage() {
 
         <input
           className="w-full mt-8 rounded-lg bg-zinc-800 p-3 outline-none"
+          placeholder="Application ID"
+          value={applicationId}
+          onChange={(e)=>setApplicationId(e.target.value)}
+        />
+
+        <input
+          className="w-full mt-4 rounded-lg bg-zinc-800 p-3 outline-none"
           placeholder="Enter Email"
           value={email}
           onChange={(e)=>setEmail(e.target.value)}
