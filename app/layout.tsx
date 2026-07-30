@@ -23,6 +23,19 @@ export default function RootLayout({
   </span>
 </footer>
 
+
+<footer className="mt-16 border-t border-zinc-800 bg-black py-6">
+  <div className="mx-auto max-w-7xl px-6 text-center text-sm text-zinc-400">
+    Built with ❤️ by
+    <span className="ml-1 font-semibold text-white">
+      Sunil Kumar Prajapat
+    </span>
+    <p className="mt-2 text-zinc-500">
+      InternLaunch v1.0
+    </p>
+  </div>
+</footer>
+
 </body>
     </html>
   );
