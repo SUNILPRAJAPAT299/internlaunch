@@ -16,7 +16,14 @@ export default function RootLayout({
       lang="en"
       className="dark h-full scroll-smooth antialiased"
     >
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body className="min-h-full flex flex-col">{children}
+<footer className="border-t border-zinc-800 bg-black py-6 text-center text-sm text-zinc-500">
+  Built with ❤️ by <span className="font-semibold text-zinc-300">
+  Sunil Kumar 
+  </span>
+</footer>
+
+</body>
     </html>
   );
 }

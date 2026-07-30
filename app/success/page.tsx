@@ -84,7 +84,26 @@ export default function SuccessPage() {
 
         </motion.section>
 
-      </main>
+      
+<div className="mt-8 rounded-xl border border-emerald-500/30 bg-emerald-500/10 p-6 text-center">
+  <h2 className="text-xl font-bold text-emerald-400">
+    🎉 Application Submitted Successfully
+  </h2>
+
+  <p className="mt-3 text-zinc-300">
+    Your payment screenshot has been received.
+    You can track your application anytime.
+  </p>
+
+  <a
+    href="/status"
+    className="mt-6 inline-block rounded-lg bg-emerald-600 px-6 py-3 font-semibold text-white hover:bg-emerald-500 transition"
+  >
+    Track Application Status
+  </a>
+</div>
+
+</main>
 
       <Footer />
     </>
