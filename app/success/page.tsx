@@ -1,8 +1,12 @@
 "use client";
 
+
+
+import { Suspense } from "react";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { motion } from "framer-motion";
+
 import {
   CheckCircle2,
   Phone,
@@ -14,7 +18,7 @@ import {
 import { Footer } from "@/components/Footer";
 import { Navbar } from "@/components/Navbar";
 
-export default function SuccessPage() {
+function SuccessContent() {
   const searchParams = useSearchParams();
   const applicationId = searchParams.get("applicationId");
 
@@ -129,5 +133,18 @@ export default function SuccessPage() {
 
       <Footer />
     </>
+  );
+}
+export default function SuccessPage() {
+  return (
+    <Suspense
+      fallback={
+        <div className="flex min-h-screen items-center justify-center bg-[#0b1220] text-white">
+          Loading...
+        </div>
+      }
+    >
+      <SuccessContent />
+    </Suspense>
   );
 }
