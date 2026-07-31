@@ -56,7 +56,7 @@ export function ApplicationForm() {
         status: "Pending",
         paymentStatus: "Pending",
       });
-      router.push(`/payment?applicationId=${application.id}`);
+      router.push(`/payment?applicationId=${applicationId}`);
     } catch (error) {
       console.error("Unable to submit application", error);
       setSubmitError("We couldn’t submit your application. Please check your connection and try again.");

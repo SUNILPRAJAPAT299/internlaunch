@@ -21,15 +21,30 @@ const benefits: [LucideIcon, string][] = [[BriefcaseBusiness, "Live project expo
 const rise = { hidden: { opacity: 0, y: 20 }, show: { opacity: 1, y: 0 } };
 
 export function LandingPage() {
-  return <main className="overflow-hidden">
-    <section className="relative mx-auto max-w-7xl px-5 pb-20 pt-20 sm:pt-28 lg:px-8 lg:pb-28">
+  return <main className="overflow-hidden bg-gradient-to-b from-[#030712] via-[#071328] to-[#020617] text-white min-h-screen">
+   <section className="relative mx-auto max-w-7xl px-6 pb-16 pt-16 sm:px-8 sm:pb-20 sm:pt-24 lg:px-10 lg:pb-28 lg:pt-28">
+
+<div className="mb-10 flex items-center justify-between">
+  <Link href="/" className="text-2xl font-bold tracking-tight text-black dark:text-white">
+    Intern<span className="text-blue-500">Launch</span>
+  </Link>
+
+</div>
       <div className="absolute right-[-7rem] top-4 -z-10 size-96 rounded-full bg-blue-500/15 blur-3xl" />
-      <div className="grid items-center gap-14 lg:grid-cols-[1.05fr_.95fr]">
+      <div className="grid items-center gap-10 lg:gap-16 xl:grid-cols-[1.05fr_.95fr]">
         <motion.div initial="hidden" animate="show" transition={{ staggerChildren: .12 }}>
           <motion.div variants={rise} className="inline-flex items-center gap-2 rounded-full border border-blue-400/20 bg-blue-400/10 px-3 py-1.5 text-xs font-medium text-blue-300"><Sparkles className="size-3.5" /> Applications open for the 2026 cohort</motion.div>
-          <motion.h1 variants={rise} className="mt-6 max-w-3xl text-4xl font-semibold leading-[1.08] tracking-tight text-white sm:text-6xl">Launch Your <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-300 to-cyan-300">Tech Career</span><br />with a Real Remote Internship</motion.h1>
-          <motion.p variants={rise} className="mt-6 max-w-xl text-lg leading-8 text-slate-300">Work on real projects, learn from experienced mentors, receive your internship offer letter after verification, and build practical skills that prepare you for the software industry.</motion.p>
-          <motion.div variants={rise} className="mt-8 flex flex-col gap-3 sm:flex-row"><Link href="/apply" className="inline-flex items-center justify-center gap-2 rounded-xl bg-blue-500 px-5 py-3 text-sm font-semibold text-white shadow-xl shadow-blue-500/25 transition hover:-translate-y-0.5 hover:bg-blue-400">Apply Now <ArrowRight className="size-4" /></Link>
+          <motion.h1 variants={rise} className="mt-6 max-w-3xl text-4xl font-bold leading-tight tracking-tight text-white sm:text-5xl lg:text-6xl xl:text-7xl">Launch Your
+<span className="bg-gradient-to-r from-cyan-300 via-blue-400 to-indigo-400 bg-clip-text text-transparent">
+  Tech Career
+</span>
+<br />
+with a Real
+<span className="bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">
+  Remote Internship
+</span></motion.h1>
+          <motion.p variants={rise} className="mt-6 max-w-xl text-base leading-7 text-slate-300 sm:text-lg">Work on real projects, learn from experienced mentors, receive your internship offer letter after verification, and build practical skills that prepare you for the software industry.</motion.p>
+          <motion.div variants={rise} className="mt-10 flex flex-col gap-4 sm:flex-row"><Link href="/apply" className="inline-flex items-center justify-center gap-2 rounded-xl bg-blue-500 px-5 py-3 text-sm font-semibold text-white shadow-xl shadow-blue-500/25 transition hover:-translate-y-0.5 hover:bg-blue-400">Apply Now <ArrowRight className="size-4" /></Link>
 
 <Link
   href="/status"

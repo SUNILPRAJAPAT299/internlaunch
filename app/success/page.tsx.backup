@@ -1,7 +1,6 @@
 "use client";
 
 import Link from "next/link";
-import { useSearchParams } from "next/navigation";
 import { motion } from "framer-motion";
 import {
   CheckCircle2,
@@ -15,9 +14,6 @@ import { Footer } from "@/components/Footer";
 import { Navbar } from "@/components/Navbar";
 
 export default function SuccessPage() {
-  const searchParams = useSearchParams();
-  const applicationId = searchParams.get("applicationId");
-
   const whatsapp =
     "https://wa.me/917877025883?text=Hello%20InternLaunch%20Team,%20I%20have%20completed%20my%20%E2%82%B93,000%20registration%20payment.%20I%20am%20sending%20my%20payment%20screenshot%20for%20verification.";
 
@@ -45,14 +41,6 @@ export default function SuccessPage() {
             Thank you for registering with <b>InternLaunch</b>.
           </p>
 
-          {applicationId && (
-            <div className="mt-6 rounded-xl border border-blue-500/30 bg-blue-500/10 p-5 text-center">
-              <p className="text-sm text-slate-400">Your Application ID</p>
-              <p className="mt-2 text-3xl font-bold tracking-wider text-blue-400">{applicationId}</p>
-              <p className="mt-2 text-xs text-slate-500">Save this ID. You'll need it to track your application status.</p>
-            </div>
-          )}
-
           <div className="mt-8 space-y-4 rounded-2xl border border-white/10 bg-white/5 p-6">
 
             <div className="flex gap-3 text-slate-200">
@@ -74,16 +62,6 @@ export default function SuccessPage() {
               <Award className="text-purple-400" />
               Completion Certificate is available as an optional paid add-on.
             </div>
-
-          <button
-            onClick={() => {
-              navigator.clipboard.writeText(applicationId ?? "");
-              alert("Application ID copied!");
-            }}
-            className="mt-4 w-full rounded-lg bg-blue-600 px-5 py-3 font-semibold text-white hover:bg-blue-500"
-          >
-            Copy Application ID
-          </button>
 
           </div>
 
