@@ -11,20 +11,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { db, storage } from "@/lib/firebase";
 
-type FormData = {
-  fullName: string;
-  email: string;
-  phone: string;
-  college: string;
-  course: string;
-  year: string;
-  city: string;
-  internship: string;
-  mode: string;
-  resume: FileList;
-  linkedin?: string;
-  github?: string;
-};
+type FormData = { fullName: string; email: string; phone: string; college: string; course: string; year: string; city: string; resume: FileList; linkedin?: string; github?: string };
 const fieldStyle = "mt-2 h-11 border-white/10 bg-white/[.035] px-3 text-slate-100 placeholder:text-slate-600 focus-visible:border-blue-400";
 
 export function ApplicationForm() {
@@ -48,8 +35,6 @@ export function ApplicationForm() {
         course: data.course,
         year: data.year,
         city: data.city,
-        internship: data.internship,
-        mode: data.mode,
         linkedin: data.linkedin || "",
         github: data.github || "",
         createdAt: serverTimestamp(),
@@ -71,55 +56,6 @@ export function ApplicationForm() {
       <Field label="College / university" error={errors.college?.message}><Input placeholder="Your institution" className={fieldStyle} {...register("college", { required: "College is required." })}/></Field>
       <Field label="Course" error={errors.course?.message}><Input placeholder="e.g. B.Tech Computer Science" className={fieldStyle} {...register("course", { required: "Course is required." })}/></Field>
       <Field label="Current year" error={errors.year?.message}><select className={`${fieldStyle} w-full rounded-lg border text-sm`} defaultValue="" {...register("year", { required: "Please select your year." })}><option value="" disabled>Select your year</option><option>1st year</option><option>2nd year</option><option>3rd year</option><option>4th year</option><option>Graduate / other</option></select></Field>
-<Field
-  label="Internship Domain"
-  error={errors.internship?.message}
->
-  <select
-    className={`${fieldStyle} w-full rounded-lg border text-sm`}
-    defaultValue=""
-    {...register("internship", {
-      required: "Please select an internship.",
-    })}
-  >
-    <option value="" disabled>Select Internship</option>
-    <option>Full Stack Web Developer</option>
-    <option>Frontend Developer</option>
-    <option>Backend Developer</option>
-    <option>PHP Developer</option>
-    <option>React.js Developer</option>
-    <option>Node.js Developer</option>
-    <option>Python Developer</option>
-    <option>Java Developer</option>
-    <option>Data Analyst</option>
-    <option>AI / Machine Learning</option>
-    <option>UI/UX Designer</option>
-    <option>Graphic Designer</option>
-    <option>Social Media Marketing</option>
-    <option>Digital Marketing</option>
-    <option>Content Writer</option>
-    <option>Business Development</option>
-    <option>HR Recruiter</option>
-    <option>QA Tester</option>
-  </select>
-</Field>
-
-<Field
-  label="Internship Mode"
-  error={errors.mode?.message}
->
-  <select
-    className={`${fieldStyle} w-full rounded-lg border text-sm`}
-    defaultValue=""
-    {...register("mode", {
-      required: "Please select internship mode.",
-    })}
-  >
-    <option value="" disabled>Select Mode</option>
-    <option>Remote</option>
-    <option>Offline</option>
-  </select>
-</Field>
       <div className="sm:col-span-2"><Label>Resume <span className="text-blue-300">*</span></Label><input ref={node => { resumeRef(node); fileRef.current = node; }} type="file" accept=".pdf,.doc,.docx" className="hidden" {...resume} onChange={event => { resume.onChange(event); setFileName(event.target.files?.[0]?.name ?? ""); }}/><button type="button" onClick={() => fileRef.current?.click()} className="mt-2 flex w-full items-center justify-between rounded-xl border border-dashed border-white/15 bg-white/[.025] px-4 py-4 text-left transition hover:border-blue-400/50 hover:bg-blue-500/5"><span className="flex items-center gap-3"><span className="grid size-9 place-items-center rounded-lg bg-blue-500/12 text-blue-300"><FileUp className="size-4"/></span><span><span className="block text-sm font-medium text-slate-200">{fileName || "Upload your resume"}</span><span className="mt-0.5 block text-xs text-slate-500">PDF, DOC or DOCX — max 5MB</span></span></span><Upload className="size-4 text-slate-400"/></button>{errors.resume && <p className="mt-1.5 text-xs text-red-300">{errors.resume.message}</p>}</div>
       <Field label="LinkedIn profile" optional><Input type="url" placeholder="https://linkedin.com/in/..." className={fieldStyle} {...register("linkedin")}/></Field>
       <Field label="GitHub profile" optional><Input type="url" placeholder="https://github.com/..." className={fieldStyle} {...register("github")}/></Field>
