@@ -1,15 +1,15 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
 import type { ReactNode } from "react";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
-import { LoaderCircle } from "lucide-react";
+import { FileUp, LoaderCircle, Upload } from "lucide-react";
 import { addDoc, collection, serverTimestamp } from "firebase/firestore";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { db } from "@/lib/firebase";
+import { db, storage } from "@/lib/firebase";
 
 type FormData = {
   fullName: string;
@@ -23,19 +23,25 @@ type FormData = {
   city: string;
   internship: string;
   mode: string;
+  resume: FileList;
+  linkedin?: string;
+  github?: string;
 };
 const fieldStyle = "mt-2 h-11 border-white/10 bg-white/[.035] px-3 text-slate-100 placeholder:text-slate-600 focus-visible:border-blue-400";
 
 export function ApplicationForm() {
   const router = useRouter();
+  const [fileName, setFileName] = useState("");
   const [submitError, setSubmitError] = useState("");
+  const fileRef = useRef<HTMLInputElement>(null);
   const { register, handleSubmit, formState: { errors, isSubmitting } } = useForm<FormData>();
+  const { ref: resumeRef, ...resume } = register("resume", { required: "Please upload your resume." });
   const submit = async (data: FormData) => {
     setSubmitError("");
     try {
       const applicationId = `IL-${Date.now().toString().slice(-8)}`;
 
-      await addDoc(collection(db, "applications"), {
+      const application = await addDoc(collection(db, "applications"), {
         applicationId: applicationId,
         name: data.fullName,
         fatherName: data.fatherName,
@@ -48,6 +54,8 @@ export function ApplicationForm() {
         city: data.city,
         internship: data.internship,
         mode: data.mode,
+        linkedin: data.linkedin || "",
+        github: data.github || "",
         createdAt: serverTimestamp(),
         status: "Pending",
         paymentStatus: "Pending",
@@ -118,6 +126,9 @@ export function ApplicationForm() {
     <option>Offline</option>
   </select>
 </Field>
+      <div className="sm:col-span-2"><Label>Resume <span className="text-blue-300">*</span></Label><input ref={node => { resumeRef(node); fileRef.current = node; }} type="file" accept=".pdf,.doc,.docx" className="hidden" {...resume} onChange={event => { resume.onChange(event); setFileName(event.target.files?.[0]?.name ?? ""); }}/><button type="button" onClick={() => fileRef.current?.click()} className="mt-2 flex w-full items-center justify-between rounded-xl border border-dashed border-white/15 bg-white/[.025] px-4 py-4 text-left transition hover:border-blue-400/50 hover:bg-blue-500/5"><span className="flex items-center gap-3"><span className="grid size-9 place-items-center rounded-lg bg-blue-500/12 text-blue-300"><FileUp className="size-4"/></span><span><span className="block text-sm font-medium text-slate-200">{fileName || "Upload your resume"}</span><span className="mt-0.5 block text-xs text-slate-500">PDF, DOC or DOCX — max 5MB</span></span></span><Upload className="size-4 text-slate-400"/></button>{errors.resume && <p className="mt-1.5 text-xs text-red-300">{errors.resume.message}</p>}</div>
+      <Field label="LinkedIn profile" optional><Input type="url" placeholder="https://linkedin.com/in/..." className={fieldStyle} {...register("linkedin")}/></Field>
+      <Field label="GitHub profile" optional><Input type="url" placeholder="https://github.com/..." className={fieldStyle} {...register("github")}/></Field>
     </div>
     {submitError && <p role="alert" className="mt-5 rounded-lg border border-red-400/20 bg-red-400/10 px-3 py-2 text-center text-sm text-red-200">{submitError}</p>}
     <Button type="submit" disabled={isSubmitting} className="mt-7 h-12 w-full rounded-xl bg-blue-500 text-sm font-semibold text-white hover:bg-blue-400">{isSubmitting ? <><LoaderCircle className="size-4 animate-spin"/>Submitting application...</> : "Submit application"}</Button>
