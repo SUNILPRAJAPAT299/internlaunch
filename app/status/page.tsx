@@ -129,10 +129,29 @@ export default function StatusPage() {
             </div>
 
             {data.paymentStatus === "Paid" && (
-              <div className="rounded-lg bg-emerald-500/10 p-4 border border-emerald-500/30">
-                🎉 Your payment has been verified.
-                <br />
-                Offer Letter will be shared on WhatsApp shortly.
+              <div className="rounded-xl border border-emerald-500/30 bg-emerald-500/10 p-5">
+                <p className="text-lg font-bold text-emerald-300">
+                  ✅ Payment Successful
+                </p>
+
+                <p className="mt-3 leading-7 text-slate-200">
+                  Your payment is done.
+                </p>
+
+                <p className="mt-2 leading-7 text-slate-300">
+                  You'll receive your offer letter within
+                  <span className="font-semibold text-white">
+                    {" "}24–48 working hours
+                  </span>.
+                </p>
+
+                <p className="mt-2 leading-7 text-slate-400">
+                  Please be patient while our team processes your offer letter.
+                </p>
+
+                <p className="mt-4 font-medium text-emerald-300">
+                  Thank you for using InternLaunch ❤️
+                </p>
               </div>
             )}
 

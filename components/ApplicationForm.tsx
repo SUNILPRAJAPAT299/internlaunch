@@ -13,6 +13,8 @@ import { db, storage } from "@/lib/firebase";
 
 type FormData = {
   fullName: string;
+  fatherName: string;
+  address: string;
   email: string;
   phone: string;
   college: string;
@@ -42,6 +44,8 @@ export function ApplicationForm() {
       const application = await addDoc(collection(db, "applications"), {
         applicationId: applicationId,
         name: data.fullName,
+        fatherName: data.fatherName,
+        address: data.address,
         email: data.email,
         phone: data.phone,
         college: data.college,
@@ -65,6 +69,8 @@ export function ApplicationForm() {
   return <form onSubmit={handleSubmit(submit)} className="rounded-2xl border border-white/10 bg-[#111b30]/85 p-5 shadow-2xl shadow-black/20 sm:p-8">
     <div className="grid gap-5 sm:grid-cols-2">
       <Field label="Full name" error={errors.fullName?.message}><Input placeholder="Your full name" className={fieldStyle} {...register("fullName", { required: "Full name is required." })}/></Field>
+      <Field label="Father's name" error={errors.fatherName?.message}><Input placeholder="Your father's full name" className={fieldStyle} {...register("fatherName", { required: "Father's name is required." })}/></Field>
+      <Field label="Full address" error={errors.address?.message}><Input placeholder="House no., street, area, city, state" className={fieldStyle} {...register("address", { required: "Address is required." })}/></Field>
       <Field label="Email address" error={errors.email?.message}><Input type="email" placeholder="you@example.com" className={fieldStyle} {...register("email", { required: "Email is required.", pattern: { value: /^\S+@\S+\.\S+$/, message: "Enter a valid email." } })}/></Field>
       <Field label="Phone number" error={errors.phone?.message}><Input inputMode="tel" placeholder="Your contact number" className={fieldStyle} {...register("phone", { required: "Phone number is required.", minLength: { value: 10, message: "Enter a valid phone number." } })}/></Field>
       <Field label="City" error={errors.city?.message}><Input placeholder="Your city" className={fieldStyle} {...register("city", { required: "City is required." })}/></Field>

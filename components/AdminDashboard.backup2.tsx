@@ -14,8 +14,6 @@ type Application = {
   applicationId?: string;
 
   name: string;
-  fatherName?: string;
-  address?: string;
   email: string;
   phone: string;
 
@@ -179,7 +177,7 @@ return <Dialog open={Boolean(application)} onOpenChange={open => !open && onClos
   label="Mode"
   value={application.mode || "Not Selected"}
 />
-  <Detail label="Email" value={application.email}/><Detail label="Phone" value={application.phone}/><Detail label="Father's Name" value={application.fatherName || "—"}/><Detail label="Address" value={application.address || "—"}/><Detail label="College" value={application.college}/><Detail label="Course" value={`${application.course} · ${application.year}`}/><Detail label="City" value={application.city}/><Detail label="Applied date" value={formatDate(application.createdAt)}/><Detail label="Payment" value={application.paymentStatus || "Pending"}/><Detail label="Payment ID" value={application.paymentId || "—"}/>{application.linkedin && <Detail label="LinkedIn" value={application.linkedin}/>} {application.github && <Detail label="GitHub" value={application.github}/>}</div><div className="mt-7 border-t border-white/8 pt-5">{application.resumeURL ? <a href={application.resumeURL} target="_blank" rel="noreferrer" download className="inline-flex h-10 items-center gap-2 rounded-lg bg-blue-500 px-4 text-sm font-semibold text-white hover:bg-blue-400"><Download className="size-4"/>Download resume</a> : <span className="text-sm text-slate-500">Resume unavailable</span>}{application.linkedin && <a href={application.linkedin} target="_blank" rel="noreferrer" className="ml-3 inline-flex h-10 items-center gap-2 rounded-lg border border-white/10 px-4 text-sm text-slate-200 hover:bg-white/5"><ExternalLink className="size-4"/>LinkedIn</a>}</div>
+  <Detail label="Email" value={application.email}/><Detail label="Phone" value={application.phone}/><Detail label="College" value={application.college}/><Detail label="Course" value={`${application.course} · ${application.year}`}/><Detail label="City" value={application.city}/><Detail label="Applied date" value={formatDate(application.createdAt)}/><Detail label="Payment" value={application.paymentStatus || "Pending"}/><Detail label="Payment ID" value={application.paymentId || "—"}/>{application.linkedin && <Detail label="LinkedIn" value={application.linkedin}/>} {application.github && <Detail label="GitHub" value={application.github}/>}</div><div className="mt-7 border-t border-white/8 pt-5">{application.resumeURL ? <a href={application.resumeURL} target="_blank" rel="noreferrer" download className="inline-flex h-10 items-center gap-2 rounded-lg bg-blue-500 px-4 text-sm font-semibold text-white hover:bg-blue-400"><Download className="size-4"/>Download resume</a> : <span className="text-sm text-slate-500">Resume unavailable</span>}{application.linkedin && <a href={application.linkedin} target="_blank" rel="noreferrer" className="ml-3 inline-flex h-10 items-center gap-2 rounded-lg border border-white/10 px-4 text-sm text-slate-200 hover:bg-white/5"><ExternalLink className="size-4"/>LinkedIn</a>}</div>
 <div className="mt-8 flex flex-wrap gap-3 border-t border-white/10 pt-6">
   <Button onClick={() => updateStatus("Paid")} className="bg-emerald-600 hover:bg-emerald-500">
     Approve
